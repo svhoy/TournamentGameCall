@@ -1,6 +1,7 @@
 # Ignore Folders
 .vs_code
 __pycache__
+text-to-speech
 
 # Ignore Config Files
 *.cfg

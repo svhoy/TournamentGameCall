@@ -1,0 +1,9 @@
+# Ignore Folders
+.vs_code
+__pycache__
+
+# Ignore Config Files
+*.cfg
+
+# Ignore Audio Outputs
+*.mp3

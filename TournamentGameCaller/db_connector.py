@@ -1,4 +1,3 @@
-import os
 import time
 
 import pyodbc
@@ -72,8 +71,8 @@ class DB_Connector:
                 player.play()
                 time.sleep(10)
 
-    def getDisciplineName(self, disciplinShortcut):
-        disciplinNames = {
+    def getDisciplineName(self, disciplineShortcut):
+        disciplineNames = {
             "JE": "Jungeneinzel",
             "ME": "Mädcheneinzel",
             "JD": "Jungendoppel",
@@ -81,4 +80,4 @@ class DB_Connector:
             "GD": "Gemischtesdoppel",
         }
 
-        return disciplinNames[disciplinShortcut]
+        return disciplineNames[disciplineShortcut]

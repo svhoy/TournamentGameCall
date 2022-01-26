@@ -11,3 +11,13 @@ class Configuration:
         database_config["Path"] = self.config["DATABASE"]["Path"]
         database_config["Password"] = self.config["DATABASE"]["Password"]
         return database_config
+
+    def get_discipline_name(self, discipline_shortcut: str) -> str:
+        discipline_names = {
+            "JE": "Jungeneinzel",
+            "ME": "Mädcheneinzel",
+            "JD": "Jungendoppel",
+            "MD": "Mädchendoppel",
+            "GD": "Gemischtesdoppel",
+        }
+        return discipline_names[discipline_shortcut]

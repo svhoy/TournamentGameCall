@@ -1,7 +1,4 @@
-import os
+from TournamentGameCaller.tournament_game_caller import TournamentGameCaller
 
-from TournamentGameCaller.db_connector import DB_Connector
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-DB_Connector(dir_path)
+gameCaller = TournamentGameCaller()
+gameCaller.start()

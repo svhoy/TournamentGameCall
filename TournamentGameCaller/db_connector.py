@@ -1,82 +1,92 @@
-import time
+from sqlite3 import Cursor
 
 import pyodbc
-import vlc
-from gtts import gTTS
 
+from .caller import double_caller, single_caller
 from .config import Configuration
 
 
-class DB_Connector:
-    def __init__(self, dir_path):
-        language = "de"
-        print(dir_path)
-        config = Configuration()
-        database = config.getDatabaseConfig()
+class DB_connector:
+    def __init__(self):
+        db_config = self.get_config()
+        self._cursor = self.connect_db(db_config)
 
-        conn = pyodbc.connect(
+    def get_config(self) -> dict:
+        return Configuration().getDatabaseConfig()
+
+    def connect_db(self, db_config) -> Cursor:
+        # Verbindung mit Datenbank herstellen
+        self._conn = pyodbc.connect(
             r"Driver={"
-            + database["Driver"]
+            + db_config["Driver"]
             + "}; DBQ="
-            + database["Path"]
+            + db_config["Path"]
             + "; PWD="
-            + database["Password"]
+            + db_config["Password"]
             + ";"
         )
-        cursor = conn.cursor()
-        cursor.execute(
+        return self._conn.cursor()
+
+    def disconnect_db(self) -> None:
+        self._conn.close()
+
+    def get_games(self) -> list:
+        self._cursor.execute(
             "select Event.name, Court.name, PlayerMatch.event, PlayerMatch.van1, PlayerMatch.van2 from (Event inner join PlayerMatch on Event.ID = PlayerMatch.event) inner join Court on Court.playermatch=PlayerMatch.id "
         )
+        return self._cursor.fetchall()
 
-        match = cursor.fetchall()
+    def get_single_players(self, planning_id1, planning_id2, event_id) -> list:
+        self._cursor.execute(
+            "select Player.name, Player.firstname from (Entry inner join Player on Entry.player1 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
+            + str(planning_id1)
+            + "and PlayerMatch.event = "
+            + str(event_id)
+            + ""
+        )
+        player1 = self._cursor.fetchall()
+        self._cursor.execute(
+            "select Player.name, Player.firstname from (Entry inner join Player on Entry.player1 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
+            + str(planning_id2)
+            + "and PlayerMatch.event = "
+            + str(event_id)
+            + ""
+        )
+        player2 = self._cursor.fetchall()
+        return [player1[0], player2[0]]
 
-        for row in match:
-            print(row)
-            cursor.execute(
-                "select Player.name, Player.firstname from (Entry inner join Player on Entry.player1 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
-                + str(row[3])
-                + "and PlayerMatch.event = "
-                + str(row[2])
-                + ""
-            )
-            player1 = cursor.fetchall()
-            cursor.execute(
-                "select Player.name, Player.firstname from (Entry inner join Player on Entry.player1 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
-                + str(row[4])
-                + "and PlayerMatch.event = "
-                + str(row[2])
-                + ""
-            )
-            player2 = cursor.fetchall()
-            game = (
-                self.getDisciplineName(row[0][:2])
-                + row[0][2:]
-                + " auf Spielfeld "
-                + str(int(row[1]))
-                + ": "
-                + player1[0][1]
-                + " "
-                + player1[0][0]
-                + " gegen "
-                + player2[0][1]
-                + " "
-                + player2[0][0]
-            )
-            print(game)
-            speech = gTTS(text=game, lang=language, slow=False)
-            speech.save("audio/test.mp3")
+    def get_double_players(self, planning_id1, planning_id2, event_id) -> list:
+        self._cursor.execute(
+            "select Player.name, Player.firstname from (Entry inner join Player on Entry.player1 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
+            + str(planning_id1)
+            + "and PlayerMatch.event = "
+            + str(event_id)
+            + ""
+        )
+        player1 = self._cursor.fetchall()
+        self._cursor.execute(
+            "select Player.name, Player.firstname from (Entry inner join Player on Entry.player1 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
+            + str(planning_id2)
+            + "and PlayerMatch.event = "
+            + str(event_id)
+            + ""
+        )
+        player2 = self._cursor.fetchall()
 
-            player = vlc.MediaPlayer(dir_path + "/audio/test.mp3")
-            player.play()
-            time.sleep(10)
-
-    def getDisciplineName(self, disciplineShortcut:str) -> str:
-        disciplineNames = {
-            "JE": "Jungeneinzel",
-            "ME": "Mädcheneinzel",
-            "JD": "Jungendoppel",
-            "MD": "Mädchendoppel",
-            "GD": "Gemischtesdoppel",
-        }
-
-        return disciplineNames[disciplineShortcut]
+        self._cursor.execute(
+            "select Player.name, Player.firstname from (Entry inner join Player on Entry.player2 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
+            + str(planning_id1)
+            + "and PlayerMatch.event = "
+            + str(event_id)
+            + ""
+        )
+        player3 = self._cursor.fetchall()
+        self._cursor.execute(
+            "select Player.name, Player.firstname from (Entry inner join Player on Entry.player2 = Player.id) inner join PlayerMatch on Entry.ID = PlayerMatch.entry where PlayerMatch.planning ="
+            + str(planning_id2)
+            + "and PlayerMatch.event = "
+            + str(event_id)
+            + ""
+        )
+        player4 = self._cursor.fetchall()
+        return [player1[0], player2[0], player3[0], player4[0]]

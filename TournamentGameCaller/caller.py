@@ -7,7 +7,6 @@ language = "de"
 
 
 def single_caller(discipline, age_class, court, players):
-    print(players)
     game = (
         discipline
         + age_class
@@ -28,7 +27,6 @@ def single_caller(discipline, age_class, court, players):
 
 
 def double_caller(discipline, age_class, court, players):
-    print(players)
     game = (
         discipline
         + age_class
@@ -39,18 +37,17 @@ def double_caller(discipline, age_class, court, players):
         + " "
         + players[0][0]
         + " und "
-        + players[2][1]
-        + " "
-        + players[2][0]
-        + " gegen "
         + players[1][1]
         + " "
         + players[1][0]
+        + " gegen "
+        + players[2][1]
+        + " "
+        + players[2][0]
         + " und "
         + players[3][1]
         + " "
         + players[3][0]
-        + "     ."
     )
     print(game)
     text_to_speech(game)
@@ -69,7 +66,6 @@ def caller(audio):
     player.set_media(media)
     player.play()
 
-    time.sleep(15)
+    time.sleep(10)
     while player.is_playing():
-        print("test")
-        time.sleep(5)
+        time.sleep(1)

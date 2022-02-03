@@ -1,6 +1,9 @@
 # Ignore Folders
 .vscode
 .venv
+.idea
+venv
+idea
 __pycache__
 text-to-speech
 

@@ -14,7 +14,7 @@ class TournamentGameCaller:
 
         for match in matches:
             print(match)
-            if match[0][:2] == "JE" or match[0][:2] == "ME":
+            if match[0][1] == "E":
                 players = db_conn.get_single_players(match[3], match[4], match[2])
                 single_caller(
                     Configuration().get_discipline_name(match[0][:2]),

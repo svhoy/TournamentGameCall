@@ -1,14 +1,15 @@
 from .caller import double_caller, single_caller
 from .config import Configuration
-from .db_connector import DB_connector
+from .db_connector import DbConnector
 
 
 class TournamentGameCaller:
     def __init__(self):
         pass
 
-    def start(self):
-        db_conn = DB_connector()
+    @staticmethod
+    def start():
+        db_conn = DbConnector()
 
         matches = db_conn.get_games()
 

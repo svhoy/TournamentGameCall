@@ -2,11 +2,10 @@ from sqlite3 import Cursor
 
 import pyodbc
 
-from .caller import double_caller, single_caller
 from .config import Configuration
 
 
-class DB_connector:
+class DbConnector:
     def __init__(self) -> None:
         db_config = self.get_config()
         self._cursor = self.connect_db(db_config)

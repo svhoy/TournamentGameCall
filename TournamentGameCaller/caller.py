@@ -6,7 +6,7 @@ from gtts import gTTS
 language = "de"
 
 
-def single_caller(discipline, age_class, court, players):
+def single_caller(discipline, age_class, court, players) -> None:
     game = (
         discipline
         + age_class
@@ -26,7 +26,7 @@ def single_caller(discipline, age_class, court, players):
     text_to_speech(game)
 
 
-def double_caller(discipline, age_class, court, players):
+def double_caller(discipline, age_class, court, players) -> None:
     game = (
         discipline
         + age_class
@@ -53,13 +53,13 @@ def double_caller(discipline, age_class, court, players):
     text_to_speech(game)
 
 
-def text_to_speech(game_text):
+def text_to_speech(game_text) -> None:
     speech = gTTS(text=game_text, lang=language, slow=False)
     speech.save("audio/game.mp3")
     caller("audio/game.mp3")
 
 
-def caller(audio):
+def caller(audio) -> None:
     instance = vlc.Instance()
     player = instance.media_player_new()
     media = instance.media_new(audio)

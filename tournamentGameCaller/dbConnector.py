@@ -7,11 +7,8 @@ from .config import Configuration
 
 class DbConnector:
     def __init__(self) -> None:
-        db_config = self.get_config()
+        db_config = Configuration().get_database_config()
         self._cursor = self.connect_db(db_config)
-
-    def get_config(self) -> dict:
-        return Configuration().get_database_config()
 
     def connect_db(self, db_config) -> Cursor:
         # Verbindung mit Datenbank herstellen

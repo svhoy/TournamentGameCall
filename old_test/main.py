@@ -1,6 +1,5 @@
 import os
 import time
-from pydoc import TextRepr
 
 import pyttsx3
 import vlc

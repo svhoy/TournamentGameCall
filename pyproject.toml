@@ -2,7 +2,10 @@
 line-length=90
 
 
- Pylint section
+#Pylint section
 [tool.pylint]
 [tool.pylint.master]
-ignore= I1101
+
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = ['I1101']

@@ -1,4 +1,4 @@
-name: Pylint
+name: Pylint & Black
 
 on: [push, pull_request]
 
@@ -21,3 +21,7 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
+    - uses: actions/checkout@v2
+    - uses: psf/black@stable
+      with:
+        options: "--check --verbose"

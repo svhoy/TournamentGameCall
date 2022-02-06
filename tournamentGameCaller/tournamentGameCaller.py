@@ -1,6 +1,6 @@
 from .caller import double_caller, single_caller
+from .config import Configuration
 from .dbConnector import DbConnector
-from .donfig import Configuration
 
 
 class TournamentGameCaller:

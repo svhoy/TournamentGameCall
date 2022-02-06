@@ -3,7 +3,7 @@ import time
 import vlc
 from gtts import gTTS
 
-language = "de"
+LANGUAGE = "de"
 
 
 def single_caller(discipline, age_class, court, players) -> None:
@@ -54,7 +54,7 @@ def double_caller(discipline, age_class, court, players) -> None:
 
 
 def text_to_speech(game_text) -> None:
-    speech = gTTS(text=game_text, lang=language, slow=False)
+    speech = gTTS(text=game_text, lang=LANGUAGE, slow=False)
     speech.save("audio/game.mp3")
     caller("audio/game.mp3")
 

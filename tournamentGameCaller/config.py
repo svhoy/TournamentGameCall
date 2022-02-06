@@ -5,7 +5,7 @@ class Configuration:
     config = SafeConfigParser()
     config.read("config/config.cfg")
 
-    def getDatabaseConfig(self) -> dict:
+    def get_database_config(self) -> dict:
         database_config = {}
         database_config["Driver"] = self.config["DATABASE"]["Driver"]
         database_config["Path"] = self.config["DATABASE"]["Path"]

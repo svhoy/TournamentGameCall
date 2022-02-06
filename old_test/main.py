@@ -1,5 +1,6 @@
 import os
 import time
+from pydoc import TextRepr
 
 import pyttsx3
 import vlc
@@ -19,8 +20,8 @@ for voice in voices:
 # convert this text to speech
 engine.setProperty("rate", 120)
 engine.setProperty("voice", voices[0].id)
-text = "U 15 Jungeneinzel auf Feld 2: Sven Hoyer gegen Stefan Lindauer"
-engine.say(text)
+TEXT = "U 15 Jungeneinzel auf Feld 2: Sven Hoyer gegen Stefan Lindauer"
+engine.say(TEXT)
 # play the speech
 engine.runAndWait()
 
@@ -29,7 +30,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 LANGUAGE = "de"
 
-speech = gTTS(text=text, lang=LANGUAGE, slow=False)
+speech = gTTS(text=TEXT, lang=LANGUAGE, slow=False)
 
 speech.save("audio/test.mp3")
 

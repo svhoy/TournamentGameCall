@@ -1,4 +1,4 @@
-from TournamentGameCaller.tournament_game_caller import TournamentGameCaller
+from TournamentGameCaller.tournamentGameCaller import TournamentGameCaller
 
 gameCaller = TournamentGameCaller()
 gameCaller.start()

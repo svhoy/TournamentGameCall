@@ -1,2 +1,8 @@
 [tool.black]
 line-length=90
+
+
+ Pylint section
+[tool.pylint]
+[tool.pylint.master]
+ignore= I1101

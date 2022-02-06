@@ -5,11 +5,11 @@ line-length=90
 #Pylint section
 [tool.pylint]
 [tool.pylint.master]
-ignore=['old_test']
+ignore=old_test
 
 [tool.pylint.'BASIC']
-package-naming-style=['PascalCase']
-class-naming-style=['PascalCase']
+module-naming-style=PascalCase
+class-naming-style=PascalCase
 
 [tool.pylint.'MESSAGES CONTROL']
 disable = ['I1101']

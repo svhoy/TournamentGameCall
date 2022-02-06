@@ -2,7 +2,7 @@ from sqlite3 import Cursor
 
 import pyodbc
 
-from .donfig import Configuration
+from .config import Configuration
 
 
 class DbConnector:

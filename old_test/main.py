@@ -10,11 +10,11 @@ engine = pyttsx3.init("sapi5")
 
 voices = engine.getProperty("voices")
 for voice in voices:
-    print("Voice: {}".format(voice.name))
-    print(" - ID: {}".format(voice.id))
-    print(" - Languages: {}".format(voice.languages))
-    print(" - Gender: {}".format(voice.gender))
-    print(" - Age: {}".format(voice.age))
+    print(f"Voice: {voice.name}")
+    print(f" - ID: {voice.id}")
+    print(f" - Languages: {voice.languages}")
+    print(f" - Gender: {voice.gender}")
+    print(f" - Age: {voice.age}")
     print("\n")
 # convert this text to speech
 engine.setProperty("rate", 120)
@@ -27,9 +27,9 @@ engine.runAndWait()
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-language = "de"
+LANGUAGE = "de"
 
-speech = gTTS(text=text, lang=language, slow=False)
+speech = gTTS(text=text, lang=LANGUAGE, slow=False)
 
 speech.save("audio/test.mp3")
 

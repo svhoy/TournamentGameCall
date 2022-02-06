@@ -8,7 +8,7 @@ line-length=90
 ignore='old_test/'
 
 [tool.pylint.'BASIC']
-module-naming-style='PascalCase'
+module-naming-style='camelCase'
 class-naming-style='PascalCase'
 
 [tool.pylint.'MESSAGES CONTROL']

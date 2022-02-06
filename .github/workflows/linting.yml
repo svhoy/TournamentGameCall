@@ -3,7 +3,7 @@ name: Pylint & Black
 on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,10 +22,11 @@ jobs:
       run: |
         pylint $(git ls-files '*.py')
 
-  lint:
+  black:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: psf/black@stable
         with:
-          options: "--check --verbose"
+          options: "--check --verbose --exclude old_test "
+

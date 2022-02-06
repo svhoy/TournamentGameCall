@@ -1,15 +1,20 @@
+import os
+import time
+
 import pyttsx3
+import vlc
+from gtts import gTTS
 
 # initialize Text-to-speech engine
 engine = pyttsx3.init("sapi5")
 
-voices = engine.getProperty('voices')
+voices = engine.getProperty("voices")
 for voice in voices:
-    print("Voice: %s" % voice.name)
-    print(" - ID: %s" % voice.id)
-    print(" - Languages: %s" % voice.languages)
-    print(" - Gender: %s" % voice.gender)
-    print(" - Age: %s" % voice.age)
+    print("Voice: {}".format(voice.name))
+    print(" - ID: {}".format(voice.id))
+    print(" - Languages: {}".format(voice.languages))
+    print(" - Gender: {}".format(voice.gender))
+    print(" - Age: {}".format(voice.age))
     print("\n")
 # convert this text to speech
 engine.setProperty("rate", 120)
@@ -20,18 +25,13 @@ engine.say(text)
 engine.runAndWait()
 
 
-from gtts import gTTS
-import vlc
-import time
-
-import os 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-language = 'de'
+language = "de"
 
-speech = gTTS(text = text, lang = language, slow = False)
+speech = gTTS(text=text, lang=language, slow=False)
 
-speech.save('audio/test.mp3')
+speech.save("audio/test.mp3")
 
 player = vlc.MediaPlayer(dir_path + "/audio/test.mp3")
 player.play()

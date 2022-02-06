@@ -6,9 +6,9 @@ line-length=90
 [tool.pylint]
 [tool.pylint.master]
 
+[tool.pylint.'BASIC']
+class-naming-style=['PascalCase']
 
 [tool.pylint.'MESSAGES CONTROL']
 disable = ['I1101']
 
-[tool.pylint.'CLASSES']
-class-naming-style=['PascalCase']

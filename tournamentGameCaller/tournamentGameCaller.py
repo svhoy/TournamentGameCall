@@ -9,8 +9,7 @@ class TournamentGameCaller:
     def __init__(self):
         pass
 
-    @staticmethod
-    def start():
+    def start(self):
         """Start the Connection to Database and call the games"""
         db_conn = DbConnector()
 

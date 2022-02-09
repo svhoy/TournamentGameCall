@@ -83,7 +83,7 @@ class DbConnector:
 
         return [player1[0], player3[0], player2[0], player4[0]]
 
-    def get_player(self, planning_id, event_id) -> str:
+    def get_player(self, planning_id, event_id) -> list:
         """Getting one Player from Database first Player in Double and Single Player
 
         Args:

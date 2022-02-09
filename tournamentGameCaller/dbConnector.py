@@ -1,5 +1,7 @@
+# Standard Library
 from sqlite3 import Cursor
 
+# Third Party
 import pyodbc
 
 from .config import Configuration
@@ -10,8 +12,7 @@ class DbConnector:
         db_config = Configuration().get_database_config()
         self._cursor = self.connect_db(db_config)
 
-    def connect_db(self, db_config) -> Cursor:
-        # Verbindung mit Datenbank herstellen
+    def connect_db(self, db_config) -> pyodbc.Cursor:
         self._conn = pyodbc.connect(
             r"Driver={"
             + db_config["Driver"]

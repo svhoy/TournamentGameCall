@@ -11,7 +11,7 @@ class DbConnector:
         db_config = Configuration().get_database_config()
         self._cursor = self.connect_db(db_config)
 
-    def connect_db(self, db_config) -> Cursor:
+    def connect_db(self, db_config) -> pyodbc.Cursor:
         """Function that initzialsed the conntection to the Datebase
 
         Args:
@@ -20,7 +20,6 @@ class DbConnector:
         Returns:
             Cursor: Returns the pyodbc Courser to the Database
         """
-
         self._conn = pyodbc.connect(
             r"Driver={"
             + db_config["Driver"]

@@ -6,11 +6,10 @@ from .dbConnector import DbConnector
 class TournamentGameCaller:
     """Controller class for the everything"""
 
-    def __init__(self):
-        self.db_conn = DbConnector()
-
     def start(self):
         """Start the Connection to Database and call the games"""
+        self.db_conn = DbConnector()
+
         matches = self.db_conn.get_games()
 
         for match in matches:

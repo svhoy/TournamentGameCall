@@ -4,11 +4,14 @@ from .dbConnector import DbConnector
 
 
 class TournamentGameCaller:
+    """Controller class for the everything"""
+
     def __init__(self):
         pass
 
     @staticmethod
     def start():
+        """Start the Connection to Database and call the games"""
         db_conn = DbConnector()
 
         matches = db_conn.get_games()

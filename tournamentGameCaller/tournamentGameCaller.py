@@ -11,7 +11,7 @@ class TournamentGameCaller:
         self._db_conn = DbConnector()
 
     def start(self):
-        """function to start everything"""
+        """Start the Connection to Database and call the games"""
         courts = {
             "01": "",
             "02": "",
@@ -33,7 +33,6 @@ class TournamentGameCaller:
 
         while True:
 
-            # """Start the Connection to Database and call the games"""
             matches = self._db_conn.get_games()
 
             for match in matches:

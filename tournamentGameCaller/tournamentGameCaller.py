@@ -10,7 +10,24 @@ class TournamentGameCaller:
         self._db_conn = DbConnector()
 
     def start(self):
-        courts = {"01": "", "02": "", "03": "", "04": "", "05": "", "06": "", "07": "", "08": "", "09": "", "10": "", "11": "", "12": "", "13": "", "14": "", "15": "", "16": "", }
+        courts = {
+            "01": "",
+            "02": "",
+            "03": "",
+            "04": "",
+            "05": "",
+            "06": "",
+            "07": "",
+            "08": "",
+            "09": "",
+            "10": "",
+            "11": "",
+            "12": "",
+            "13": "",
+            "14": "",
+            "15": "",
+            "16": "",
+        }
 
         while True:
 
@@ -22,7 +39,9 @@ class TournamentGameCaller:
                     courts[match[1]] = match[5]
                     print(match)
                     if match[0][1] == "E":
-                        players = self._db_conn.get_single_players(match[3], match[4], match[2])
+                        players = self._db_conn.get_single_players(
+                            match[3], match[4], match[2]
+                        )
                         single_caller(
                             Configuration().get_discipline_name(match[0][:2]),
                             match[0][2:],
@@ -30,7 +49,9 @@ class TournamentGameCaller:
                             players,
                         )
                     else:
-                        players = self._db_conn.get_double_players(match[3], match[4], match[2])
+                        players = self._db_conn.get_double_players(
+                            match[3], match[4], match[2]
+                        )
                         double_caller(
                             Configuration().get_discipline_name(match[0][:2]),
                             match[0][2:],

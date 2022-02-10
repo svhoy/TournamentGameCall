@@ -43,7 +43,7 @@ class DbConnector:
         """
         self._cursor.execute(
             "select Event.name, Court.name, PlayerMatch.event, PlayerMatch.van1, "
-            + "PlayerMatch.van2 from (Event inner join PlayerMatch on "
+            + "PlayerMatch.van2, court.playermatch from (Event inner join PlayerMatch on "
             + "Event.ID = PlayerMatch.event) inner join "
             + "Court on Court.playermatch=PlayerMatch.id "
         )
@@ -81,7 +81,7 @@ class DbConnector:
         player3 = self.get_player(planning_id2, event_id)
         player4 = self.get_double_partner(planning_id2, event_id)
 
-        return [player1[0], player3[0], player2[0], player4[0]]
+        return [player1[0], player2[0], player3[0], player4[0]]
 
     def get_player(self, planning_id, event_id) -> list:
         """Getting one Player from Database first Player in Double and Single Player

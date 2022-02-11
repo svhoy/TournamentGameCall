@@ -31,6 +31,12 @@ class TournamentGameCaller:
             "16": "",
         }
 
+        special_game = {
+            1001: "final",
+            1003: "3",
+            2001: "halffinal",
+        }
+
         while True:
             matches = self._db_conn.get_games()
 
@@ -42,30 +48,16 @@ class TournamentGameCaller:
                         players = self._db_conn.get_single_players(
                             match[3], match[4], match[2]
                         )
-                        if match[6] == 1001:
+
+                        if match[6] in special_game:
                             single_caller(
                                 Configuration().get_discipline_name(match[0][:2]),
                                 match[0][2:],
                                 match[1],
                                 players,
-                                games="final",
+                                games=special_game[match[6]],
                             )
-                        elif match[6] == 1003:
-                            single_caller(
-                                Configuration().get_discipline_name(match[0][:2]),
-                                match[0][2:],
-                                match[1],
-                                players,
-                                games="3",
-                            )
-                        elif match[6] == 2001:
-                            single_caller(
-                                Configuration().get_discipline_name(match[0][:2]),
-                                match[0][2:],
-                                match[1],
-                                players,
-                                games="halffinal",
-                            )
+
                         else:
                             single_caller(
                                 Configuration().get_discipline_name(match[0][:2]),
@@ -79,30 +71,15 @@ class TournamentGameCaller:
                         players = self._db_conn.get_double_players(
                             match[3], match[4], match[2]
                         )
-                        if match[6] == 1001:
+                        if match[6] in special_game:
                             double_caller(
                                 Configuration().get_discipline_name(match[0][:2]),
                                 match[0][2:],
                                 match[1],
                                 players,
-                                games="final",
+                                games=special_game[match[6]],
                             )
-                        elif match[6] == 1003:
-                            double_caller(
-                                Configuration().get_discipline_name(match[0][:2]),
-                                match[0][2:],
-                                match[1],
-                                players,
-                                games="3",
-                            )
-                        elif match[6] == 2001:
-                            double_caller(
-                                Configuration().get_discipline_name(match[0][:2]),
-                                match[0][2:],
-                                match[1],
-                                players,
-                                games="halffinal",
-                            )
+
                         else:
                             double_caller(
                                 Configuration().get_discipline_name(match[0][:2]),

@@ -43,7 +43,8 @@ class DbConnector:
         """
         self._cursor.execute(
             "select Event.name, Court.name, PlayerMatch.event, PlayerMatch.van1, "
-            + "PlayerMatch.van2, court.playermatch, PlayerMatch.planning from (Event inner join PlayerMatch on "
+            + "PlayerMatch.van2, court.playermatch, PlayerMatch.planning from" 
+            + "(Event inner join PlayerMatch on "
             + "Event.ID = PlayerMatch.event) inner join "
             + "Court on Court.playermatch=PlayerMatch.id "
         )

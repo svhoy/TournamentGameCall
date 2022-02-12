@@ -35,6 +35,7 @@ class TournamentGameCaller:
             1001: "final",
             1003: "3",
             2001: "halffinal",
+            2002: "halffinal"
         }
 
         while True:

@@ -46,6 +46,9 @@ def single_caller(discipline, age_class, court, players, games="") -> None:
     if games == "3":
         text_to_speech("Spiel um Platz 3" + game)
 
+    if games == "halffinal":
+        text_to_speech("Im Halbfinale " + game)
+
 
 def double_caller(discipline, age_class, court, players, games="") -> None:
     """Bring all parts of the double call together and call text_to_speech function

@@ -42,8 +42,9 @@ class DbConnector:
             list: Returns a list with all games that currently on a field
         """
         self._cursor.execute(
-            "select Event.name, Court.name, PlayerMatch.event, PlayerMatch.van1, "
-            + "PlayerMatch.van2, court.playermatch from (Event inner join PlayerMatch on "
+            "select Event.name, Court.name, PlayerMatch.event, PlayerMatch.van1,"
+            + "PlayerMatch.van2, court.playermatch, PlayerMatch.planning from"
+            + "(Event inner join PlayerMatch on "
             + "Event.ID = PlayerMatch.event) inner join "
             + "Court on Court.playermatch=PlayerMatch.id "
         )

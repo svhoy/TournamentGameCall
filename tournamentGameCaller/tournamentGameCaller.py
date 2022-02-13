@@ -11,7 +11,7 @@ class TournamentGameCaller:
         self._db_conn = DbConnector()
 
     def start(self):
-        """Start the Connection to Database and call the games"""
+        """Start function the Connection to Database and call the games"""
         courts = {
             "01": "",
             "02": "",
@@ -31,8 +31,15 @@ class TournamentGameCaller:
             "16": "",
         }
 
-        while True:
+        special_game = {
+            1001: "final",
+            1003: "3",
+            2001: "halffinal",
+            2002: "halffinal",
+            "": "",
+        }
 
+        while True:
             matches = self._db_conn.get_games()
 
             for match in matches:
@@ -43,22 +50,43 @@ class TournamentGameCaller:
                         players = self._db_conn.get_single_players(
                             match[3], match[4], match[2]
                         )
-                        single_caller(
-                            Configuration().get_discipline_name(match[0][:2]),
-                            match[0][2:],
-                            match[1],
-                            players,
-                        )
+
+                        if match[6] in special_game:
+                            single_caller(
+                                Configuration().get_discipline_name(match[0][:2]),
+                                match[0][2:],
+                                match[1],
+                                players,
+                                games=special_game[match[6]],
+                            )
+
+                        else:
+                            single_caller(
+                                Configuration().get_discipline_name(match[0][:2]),
+                                match[0][2:],
+                                match[1],
+                                players,
+                            )
                     else:
                         players = self._db_conn.get_double_players(
                             match[3], match[4], match[2]
                         )
-                        double_caller(
-                            Configuration().get_discipline_name(match[0][:2]),
-                            match[0][2:],
-                            match[1],
-                            players,
-                        )
+                        if match[6] in special_game:
+                            double_caller(
+                                Configuration().get_discipline_name(match[0][:2]),
+                                match[0][2:],
+                                match[1],
+                                players,
+                                games=special_game[match[6]],
+                            )
+
+                        else:
+                            double_caller(
+                                Configuration().get_discipline_name(match[0][:2]),
+                                match[0][2:],
+                                match[1],
+                                players,
+                            )
 
     def get_db_conn(self):
         """Returns the DB Connector Class

@@ -1,6 +1,6 @@
 """ main to start the Tournament Game Caller Package"""
 # Library
-from TournamentGameCaller.tournamentGameCaller import TournamentGameCaller
+from tournamentGameCaller.tournamentGameCaller import TournamentGameCaller
 
 
 gameCaller = TournamentGameCaller()

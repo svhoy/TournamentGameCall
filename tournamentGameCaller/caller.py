@@ -10,7 +10,7 @@ from gtts import gTTS
 LANGUAGE = "de"
 
 
-def single_caller(discipline, age_class, court, players) -> None:
+def single_caller(discipline, age_class, court, players, games="") -> None:
     """Bring all parts of the single call together and call text_to_speech function
 
     Args:
@@ -34,11 +34,23 @@ def single_caller(discipline, age_class, court, players) -> None:
         + players[1][0]
         + " "
     )
+
     print(game)
-    text_to_speech(game)
+
+    if games == "":
+        text_to_speech(game)
+
+    if games == "final":
+        text_to_speech("Im Finale " + game)
+
+    if games == "3":
+        text_to_speech("Spiel um Platz 3" + game)
+
+    if games == "halffinal":
+        text_to_speech("Im Halbfinale " + game)
 
 
-def double_caller(discipline, age_class, court, players) -> None:
+def double_caller(discipline, age_class, court, players, games="") -> None:
     """Bring all parts of the double call together and call text_to_speech function
 
     Args:
@@ -70,7 +82,18 @@ def double_caller(discipline, age_class, court, players) -> None:
         + players[3][0]
     )
     print(game)
-    text_to_speech(game)
+
+    if games == "":
+        text_to_speech(game)
+
+    if games == "final":
+        text_to_speech("Im Finale " + game)
+
+    if games == "3":
+        text_to_speech("Spiel um Platz 3" + game)
+
+    if games == "halffinal":
+        text_to_speech("Im Halbfinale " + game)
 
 
 def text_to_speech(game_text: str) -> None:

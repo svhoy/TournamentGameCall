@@ -37,7 +37,7 @@ def single_caller(discipline, age_class, court, players, games="") -> None:
 
     print(game)
 
-    if games is None:
+    if games == "":
         text_to_speech(game)
 
     if games == "final":
@@ -83,7 +83,7 @@ def double_caller(discipline, age_class, court, players, games="") -> None:
     )
     print(game)
 
-    if games is None:
+    if games == "":
         text_to_speech(game)
 
     if games == "final":

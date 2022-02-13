@@ -36,6 +36,7 @@ class TournamentGameCaller:
             1003: "3",
             2001: "halffinal",
             2002: "halffinal",
+            "": "",
         }
 
         while True:
@@ -65,9 +66,7 @@ class TournamentGameCaller:
                                 match[0][2:],
                                 match[1],
                                 players,
-                                games=None,
                             )
-
                     else:
                         players = self._db_conn.get_double_players(
                             match[3], match[4], match[2]
@@ -87,7 +86,6 @@ class TournamentGameCaller:
                                 match[0][2:],
                                 match[1],
                                 players,
-                                games=None,
                             )
 
     def get_db_conn(self):

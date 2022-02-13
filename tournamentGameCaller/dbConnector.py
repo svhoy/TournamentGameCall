@@ -127,3 +127,15 @@ class DbConnector:
             + ""
         )
         return self._cursor.fetchall()
+
+    def get_walkover(self):
+        """function to get all walkover games"""
+        self._cursor.execute(
+            "select PlayerMatch.id, Event.name, PlayerMatch.event, PlayerMatch.van1,"
+            + "PlayerMatch.van2, PlayerMatch.planning, PlayerMatch.winner from"
+            + "(Event inner join PlayerMatch on "
+            + "Event.ID = PlayerMatch.event)"
+            + "where PlayerMatch.id > 2000 and"
+            + "PlayerMatch.scorestatus = 1 and PlayerMatch.forwardloser = -1"
+        )
+        return self._cursor.fetchall()

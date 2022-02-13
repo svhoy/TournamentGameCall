@@ -9,8 +9,15 @@ from gtts import gTTS
 
 LANGUAGE = "de"
 
+special_game = {
+    1001: "Im Finale",
+    1003: "Spiel um Platz 3",
+    2001: "Im Halbfinale ",
+    2002: "Im Halbfinale ",
+}
 
-def single_caller(discipline, age_class, court, players, games="") -> None:
+
+def single_caller(discipline, age_class, court, players, game_id) -> None:
     """Bring all parts of the single call together and call text_to_speech function
 
     Args:
@@ -37,20 +44,47 @@ def single_caller(discipline, age_class, court, players, games="") -> None:
 
     print(game)
 
-    if games == "":
+    if game_id in special_game:
+        text_to_speech(special_game[game_id] + game)
+
+    else:
         text_to_speech(game)
 
-    if games == "final":
-        text_to_speech("Im Finale " + game)
 
-    if games == "3":
-        text_to_speech("Spiel um Platz 3" + game)
+def walkover_single_caller(discipline, age_class, players, walkover_id) -> None:
+    """ "function to call single games wich are walkovers"""
+    Player_first = players[0][1] + " " + players[0][0]
+    Player_second = players[1][1] + " " + players[1][0] + " "
 
-    if games == "halffinal":
-        text_to_speech("Im Halbfinale " + game)
+    if walkover_id == 1:
+        game = (
+            "Das Spiel im "
+            + discipline
+            + age_class
+            + Player_first
+            + " gegen "
+            + Player_second
+            + " geht Kampflos an "
+            + Player_first
+        )
+    elif walkover_id == 2:
+        game = (
+            "Das Spiel im "
+            + discipline
+            + age_class
+            + Player_first
+            + " gegen "
+            + Player_second
+            + " geht Kampflos an "
+            + Player_second
+        )
+    else:
+        print("es ist ein unerwarteter Fehler aufgetreten siehe caller.py line 94")
+
+    text_to_speech(game)
 
 
-def double_caller(discipline, age_class, court, players, games="") -> None:
+def double_caller(discipline, age_class, court, players, game_id) -> None:
     """Bring all parts of the double call together and call text_to_speech function
 
     Args:
@@ -83,17 +117,60 @@ def double_caller(discipline, age_class, court, players, games="") -> None:
     )
     print(game)
 
-    if games == "":
+    if game_id in special_game:
+        text_to_speech(special_game[game_id] + game)
+
+    else:
         text_to_speech(game)
 
-    if games == "final":
-        text_to_speech("Im Finale " + game)
 
-    if games == "3":
-        text_to_speech("Spiel um Platz 3" + game)
+def walkover_double_caller(discipline, age_class, players, walkover_id) -> None:
+    """functio to call all double games which are walkovers"""
+    Player_first = (
+        players[0][1]
+        + " "
+        + players[0][0]
+        + " und "
+        + players[1][1]
+        + " "
+        + players[1][0]
+    )
+    Player_second = (
+        players[2][1]
+        + " "
+        + players[2][0]
+        + " und "
+        + players[3][1]
+        + " "
+        + players[3][0]
+    )
 
-    if games == "halffinal":
-        text_to_speech("Im Halbfinale " + game)
+    if walkover_id == 1:
+        game = (
+            "Das Spiel im "
+            + discipline
+            + age_class
+            + Player_first
+            + " gegen "
+            + Player_second
+            + " geht Kampflos an "
+            + Player_first
+        )
+    elif walkover_id == 2:
+        game = (
+            "Das Spiel im "
+            + discipline
+            + age_class
+            + Player_first
+            + " gegen "
+            + Player_second
+            + " geht Kampflos an "
+            + Player_second
+        )
+    else:
+        print("es ist ein unerwarteter Fehler aufgetreten siehe caller.py line 149")
+
+    text_to_speech(game)
 
 
 def text_to_speech(game_text: str) -> None:

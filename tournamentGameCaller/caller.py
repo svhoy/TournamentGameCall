@@ -126,7 +126,7 @@ def double_caller(discipline, age_class, court, players, game_id) -> None:
 
 def walkover_double_caller(discipline, age_class, players, walkover_id) -> None:
     """functio to call all double games which are walkovers"""
-    Player_first = (
+    player_first = (
         players[0][1]
         + " "
         + players[0][0]
@@ -135,7 +135,7 @@ def walkover_double_caller(discipline, age_class, players, walkover_id) -> None:
         + " "
         + players[1][0]
     )
-    Player_second = (
+    player_second = (
         players[2][1]
         + " "
         + players[2][0]

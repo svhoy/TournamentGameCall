@@ -53,30 +53,30 @@ def single_caller(discipline, age_class, court, players, game_id) -> None:
 
 def walkover_single_caller(discipline, age_class, players, walkover_id) -> None:
     """ "function to call single games wich are walkovers"""
-    Player_first = players[0][1] + " " + players[0][0]
-    Player_second = players[1][1] + " " + players[1][0] + " "
+    player_first = players[0][1] + " " + players[0][0]
+    player_second = players[1][1] + " " + players[1][0] + " "
 
     if walkover_id == 1:
         game = (
             "Das Spiel im "
             + discipline
             + age_class
-            + Player_first
+            + player_first
             + " gegen "
-            + Player_second
+            + player_second
             + " geht Kampflos an "
-            + Player_first
+            + player_first
         )
     elif walkover_id == 2:
         game = (
             "Das Spiel im "
             + discipline
             + age_class
-            + Player_first
+            + player_first
             + " gegen "
-            + Player_second
+            + player_second
             + " geht Kampflos an "
-            + Player_second
+            + player_second
         )
     else:
         print("es ist ein unerwarteter Fehler aufgetreten siehe caller.py line 94")
@@ -150,22 +150,22 @@ def walkover_double_caller(discipline, age_class, players, walkover_id) -> None:
             "Das Spiel im "
             + discipline
             + age_class
-            + Player_first
+            + player_first
             + " gegen "
-            + Player_second
+            + player_second
             + " geht Kampflos an "
-            + Player_first
+            + player_first
         )
     elif walkover_id == 2:
         game = (
             "Das Spiel im "
             + discipline
             + age_class
-            + Player_first
+            + player_first
             + " gegen "
-            + Player_second
+            + player_second
             + " geht Kampflos an "
-            + Player_second
+            + player_second
         )
     else:
         print("es ist ein unerwarteter Fehler aufgetreten siehe caller.py line 149")

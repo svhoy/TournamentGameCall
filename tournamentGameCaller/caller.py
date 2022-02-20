@@ -1,9 +1,5 @@
-# Standard Library
-import time
-
 # Third Party
-import vlc
-
+from audioplayer import AudioPlayer
 from gtts import gTTS
 
 
@@ -190,12 +186,4 @@ def caller(audio: str) -> None:
     Args:
         audio (str): relative path to the audio file
     """
-    instance = vlc.Instance()
-    player = instance.media_player_new()
-    media = instance.media_new(audio)
-    player.set_media(media)
-    player.play()
-
-    time.sleep(10)
-    while player.is_playing():
-        time.sleep(1)
+    AudioPlayer(audio).play(block=True)

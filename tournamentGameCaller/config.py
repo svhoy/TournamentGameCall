@@ -1,12 +1,13 @@
 # Standard Library
 from configparser import SafeConfigParser
+import logging
 
 
 class Configuration:
     """Manage and get Configurations from config/config.cfg for the Package"""
 
     config = SafeConfigParser()
-    config.read("config/config.cfg")
+    config.read("urkunden/config.cfg")
 
     def get_database_config(self) -> dict:
         """Get Database Configurations
